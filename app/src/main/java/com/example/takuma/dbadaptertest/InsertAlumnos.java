@@ -127,7 +127,6 @@ public class InsertAlumnos extends AppCompatActivity {
                 cursorDB.getColumnIndex("estudiante_id");
                 myDb.borrarAlumno();
                 Toast.makeText(InsertAlumnos.this, "he de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
-                verInfoAlumnos();
             }
         });
         jefeDeEstudios.show();
