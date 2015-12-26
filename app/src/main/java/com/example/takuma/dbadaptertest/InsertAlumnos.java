@@ -102,6 +102,7 @@ public class InsertAlumnos extends AppCompatActivity {
                 );
     }
 
+
     public void verDatosAlumnos(String Title, String Message){
         AlertDialog.Builder verDatosAlumnos = new AlertDialog.Builder(this);
         verDatosAlumnos.setMessage(""); // 20151226 JOG - Limpiar

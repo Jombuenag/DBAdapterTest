@@ -107,6 +107,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+
     //SAVESTATE HAY QUE CONSEGUIR COMUNICAR CUAL ES LA ID DEL ALUMNO EXPULSADO DESDE INSERTALUMNOS
 
     public boolean borrarAlumno(Integer idBorrar){
