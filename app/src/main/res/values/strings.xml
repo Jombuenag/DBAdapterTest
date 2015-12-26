@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DBAdapter Test</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="alumnos_name">Alumnos</string>
+    <string name="profesores_name">Profesores</string>
+    <string name="title_activity_insert_profesores">InsertProfesores</string>
+
+</resources>

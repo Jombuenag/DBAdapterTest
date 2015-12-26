@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".InsertProfesores">
+
+//TEXTVIEWS DE PROFESORES
+Ciclo tutor despacho
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nombre"
+        android:id="@+id/txtNombreP"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Apellidos"
+        android:id="@+id/txtApellidosP"
+        android:layout_below="@+id/txtNombreP"
+        android:layout_alignStart="@+id/txtNombreP"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Edad"
+        android:id="@+id/txtEdadP"
+        android:layout_below="@+id/txtApellidosP"
+        android:layout_alignStart="@+id/txtApellidosP"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Ciclo"
+        android:id="@+id/txtCicloP"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtEdadP"
+        android:layout_alignLeft="@+id/txtEdadP"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tutor"
+        android:id="@+id/txtTutor"
+        android:layout_below="@+id/txtCicloP"
+        android:layout_alignStart="@+id/txtCicloP"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Despacho"
+        android:id="@+id/txtDespachoP"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtTutor"
+        android:layout_alignLeft="@+id/txtTutor"
+        android:layout_marginTop="15dp" />
+//EDITTEXTS DE ALUMNOS
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editNombreP"
+        android:layout_toEndOf="@+id/txtApellidosP"
+        android:layout_above="@+id/editApellidosP"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editApellidosP"
+        android:layout_below="@+id/txtNombreP"
+        android:layout_alignStart="@+id/editNombreP"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editEdadP"
+        android:layout_below="@+id/txtApellidosP"
+        android:layout_toEndOf="@+id/txtCicloP"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editCicloP"
+        android:layout_below="@+id/txtEdadP"
+        android:layout_toEndOf="@+id/txtCicloP"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTutorP"
+        android:layout_below="@+id/txtCicloP"
+        android:layout_alignStart="@+id/editEdadP"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDespacho"
+        android:layout_below="@+id/txtTutor"
+        android:layout_toEndOf="@+id/txtDespachoP"/>
+
+//BOTONES DE PROFESOR
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GUARDAR INFO"
+        android:id="@+id/btnAñadirProfesor"
+        android:layout_alignTop="@+id/btnVerInfoProfesor"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="50dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recuperar Info"
+        android:id="@+id/btnVerInfoProfesor"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="50dp"/>
+</RelativeLayout>
