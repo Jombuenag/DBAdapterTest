@@ -90,6 +90,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public boolean insertarDatosProfesores(String nombre, String apellidos, String edad, String tutor, String ciclo, String despacho){
         SQLiteDatabase db = (this.getWritableDatabase());
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(PROFESOR_NOMBRE, nombre);
         contentValues.put(PROFESOR_APELLIDOS, apellidos);
         contentValues.put(PROFESOR_EDAD, edad);
@@ -111,7 +112,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public Cursor borrarAlumno(){
         SQLiteDatabase db = (this.getWritableDatabase());
-        Cursor cursorDB = db.rawQuery("DELETE FROM " + TABLAESTUDIANTES + " WHERE alumno_id"  + " = 9" + " ;", null);
+        Cursor cursorDB = db.rawQuery("DELETE FROM " + TABLAESTUDIANTES + " WHERE alumno_id" + " = " + alumnoExpulsado + " ;", null);
         return cursorDB;
     }
 

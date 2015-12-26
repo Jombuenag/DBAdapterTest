@@ -124,7 +124,7 @@ public class InsertAlumnos extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 alumnoExpulsado = aQuienBorro.getText().toString();
                 Cursor cursorDB = myDb.borrarAlumno();
-                cursorDB.getColumnIndex("estudiante_id");
+                cursorDB.getColumnIndex("alumno_id");
                 myDb.borrarAlumno();
                 Toast.makeText(InsertAlumnos.this, "he de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
             }
