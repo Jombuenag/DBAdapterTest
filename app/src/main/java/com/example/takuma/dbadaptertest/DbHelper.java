@@ -109,10 +109,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //SAVESTATE HAY QUE CONSEGUIR COMUNICAR CUAL ES LA ID DEL ALUMNO EXPULSADO DESDE INSERTALUMNOS
 
-    public Cursor borrarAlumno(){
+    public boolean borrarAlumno(Integer idBorrar){
         SQLiteDatabase db = (this.getWritableDatabase());
-        Cursor cursorDB = db.rawQuery("DELETE FROM " + TABLAESTUDIANTES + " WHERE estudiante_id = " + alumnoExpulsado + " ;", null);
-        return cursorDB;
+        try {
+            db.delete(TABLAESTUDIANTES, "estudiante_id=" + idBorrar + "", null);
+        } catch (Exception e) {
+            System.out.print("No he podido eliminar el alumno con id " + idBorrar);
+            e.printStackTrace();
+        }
+        return true;
     }
 
     public Cursor devolverDatosAlumnos(){

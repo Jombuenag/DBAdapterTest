@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class InsertAlumnos extends AppCompatActivity {
 
     private DbHelper myDb;
@@ -78,7 +80,13 @@ public class InsertAlumnos extends AppCompatActivity {
                                 if (cursorDB.getCount() == -1) {
                                     verDatosAlumnos("Error", "No se ha encontrado ningún dato");
                                 }
+
+                                Random rn = new Random();
+                                int iNumGenerado = rn.nextInt(10) + 1;
+
                                 while (cursorDB.moveToNext()) {
+                                    buffer.setLength(0); // 20151226 JOG - Se limpia!
+                                    buffer.append("Generación:" + iNumGenerado + "\n");
                                     buffer.append("id :" + cursorDB.getString(0) + "\n");
                                     buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
                                     buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
@@ -96,6 +104,7 @@ public class InsertAlumnos extends AppCompatActivity {
 
     public void verDatosAlumnos(String Title, String Message){
         AlertDialog.Builder verDatosAlumnos = new AlertDialog.Builder(this);
+        verDatosAlumnos.setMessage(""); // 20151226 JOG - Limpiar
         verDatosAlumnos.setCancelable(true);
         verDatosAlumnos.setTitle(Title);
         verDatosAlumnos.setMessage(Message);
@@ -122,11 +131,15 @@ public class InsertAlumnos extends AppCompatActivity {
         jefeDeEstudios.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 alumnoExpulsado = aQuienBorro.getText().toString();
-                Cursor cursorDB = myDb.borrarAlumno();
-                cursorDB.getColumnIndex("estudiante_id");
-                myDb.borrarAlumno();
                 Toast.makeText(InsertAlumnos.this, "he de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
+                if (myDb.borrarAlumno(Integer.parseInt(alumnoExpulsado))) {
+                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno con id: " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertAlumnos.this, "NO se ha podido eliminar el alumno con id: " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         jefeDeEstudios.show();
