@@ -118,6 +118,47 @@ public class DbHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public String getNombreEstudiante(Integer idAlumno){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        String nombreEstudiante = null;
+        try{
+            String sql = "select " + ESTUDIANTE_NOMBRE + " from " + TABLAESTUDIANTES + " where " + ESTUDIANTE_ID + " = " + idAlumno + ";";
+            Cursor cEstudiante = db.rawQuery(sql,null);
+            cEstudiante.moveToFirst();
+            while (!cEstudiante.isAfterLast()) {
+                nombreEstudiante = cEstudiante.getString(0);
+                cEstudiante.moveToNext();
+            }
+            cEstudiante.close();
+        }catch (Exception e){
+            System.out.println("No he podido recuperar al alumno " + idAlumno + " de la base de datos");
+            e.printStackTrace();
+        }
+
+        return nombreEstudiante;
+    }
+
+    public String getApellidoEstudiante(Integer idAlumno){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        String apellidoEstudiante = null;
+        try{
+            String sql = "select " + ESTUDIANTE_APELLIDOS + " from " + TABLAESTUDIANTES + " where " + ESTUDIANTE_ID + " = " + idAlumno + ";";
+            Cursor cEstudiante = db.rawQuery(sql,null);
+            cEstudiante.moveToFirst();
+            while (!cEstudiante.isAfterLast()) {
+                apellidoEstudiante = cEstudiante.getString(0);
+                cEstudiante.moveToNext();
+            }
+            cEstudiante.close();
+
+        }catch (Exception e){
+            System.out.println("No he podido recuperar al alumno " + idAlumno + " de la base de datos");
+            e.printStackTrace();
+        }
+
+        return apellidoEstudiante;
+    }
+
     public Cursor devolverDatosAlumnos(){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " ;" , null );

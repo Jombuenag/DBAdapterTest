@@ -123,9 +123,12 @@ public class InsertAlumnos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 alumnoExpulsado = aQuienBorro.getText().toString();
-                Toast.makeText(InsertAlumnos.this, "he de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
+
+                String nombreEstudianteAMostrar = myDb.getNombreEstudiante(Integer.parseInt(alumnoExpulsado));
+                String apellidoEstudianteAMostrar = myDb.getApellidoEstudiante(Integer.parseInt(alumnoExpulsado));
+
                 if (myDb.borrarAlumno(Integer.parseInt(alumnoExpulsado))) {
-                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno " + alumnoExpulsado + "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno " + nombreEstudianteAMostrar + " " + apellidoEstudianteAMostrar, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(InsertAlumnos.this, "No se ha podido eliminar el alumno" + alumnoExpulsado + "" , Toast.LENGTH_SHORT).show();
                 }
