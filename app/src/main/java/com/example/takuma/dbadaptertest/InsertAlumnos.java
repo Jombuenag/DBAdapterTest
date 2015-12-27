@@ -78,7 +78,7 @@ public class InsertAlumnos extends AppCompatActivity {
                                 if (cursorDB.getCount() == -1) {
                                     verDatosAlumnos("Error", "No se ha encontrado ningún dato");
                                 }
-                                while (cursorDB.moveToNext()) {
+                                while (cursorDB.moveToNext()){
                                     buffer.append("id :" + cursorDB.getString(0) + "\n");
                                     buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
                                     buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
@@ -123,10 +123,12 @@ public class InsertAlumnos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 alumnoExpulsado = aQuienBorro.getText().toString();
-                Cursor cursorDB = myDb.borrarAlumno();
-                cursorDB.getColumnIndex("estudiante_id");
-                myDb.borrarAlumno();
                 Toast.makeText(InsertAlumnos.this, "he de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
+                if (myDb.borrarAlumno(Integer.parseInt(alumnoExpulsado))) {
+                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno " + alumnoExpulsado + "", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertAlumnos.this, "No se ha podido eliminar el alumno" + alumnoExpulsado + "" , Toast.LENGTH_SHORT).show();
+                }
             }
         });
         jefeDeEstudios.show();
