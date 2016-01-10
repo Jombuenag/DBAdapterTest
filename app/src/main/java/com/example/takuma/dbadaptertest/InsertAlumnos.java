@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class InsertAlumnos extends AppCompatActivity {
@@ -18,6 +19,8 @@ public class InsertAlumnos extends AppCompatActivity {
 
     EditText editNombreA, editApellidosA, editEdadA, editCursoA, editCicloA, editNota;
     Button btnAñadir, btnVerInfo, btnBorrarAlumnos;
+    RadioGroup rgCiclos;
+
     public static String alumnoExpulsado;
 
 
@@ -30,6 +33,7 @@ public class InsertAlumnos extends AppCompatActivity {
         editEdadA = (EditText)findViewById(R.id.editEdadA);
         editCursoA = (EditText)findViewById(R.id.editCursoA);
         editCicloA = (EditText)findViewById(R.id.editCicloA);
+        rgCiclos = (RadioGroup)findViewById(R.id.rgCiclos);
         editNota = (EditText)findViewById(R.id.editNota);
         btnAñadir = (Button)findViewById(R.id.btnAñadirAlumno);
         btnVerInfo = (Button)findViewById(R.id.btnVerInfoAlumno);

@@ -12,8 +12,6 @@ public class DbHelper extends SQLiteOpenHelper {
 //VARIABLES DE CLASE
     public static final String DATABASE_NOMBRE = "colegioDB";
 
-    public static String alumnoExpulsado = InsertAlumnos.alumnoExpulsado;
-
 //TABLA ESTUDIANTES
     public static final String TABLAESTUDIANTES = "tabla_estudiantes";
     public static final String ESTUDIANTE_ID = "estudiante_id";
@@ -106,7 +104,6 @@ public class DbHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
     public boolean borrarAlumno(Integer idExpulsado){
         SQLiteDatabase db = (this.getWritableDatabase());
         try{
@@ -117,19 +114,37 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return true;
     }
-
+    public boolean borrarProfesor(Integer idDespedido){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        try{
+            db.delete(TABLAPROFESORES, "profesor_id=" + idDespedido + "", null);
+        }catch (Exception e){
+            System.out.println("No he podido despedir al profesor " + idDespedido + " de la base de datos");
+            e.printStackTrace();
+        }
+        return true;
+    }
     public Cursor devolverDatosAlumnos(){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " ;" , null );
         return cursorDB;
     }
-
     public Cursor devolverDatosProfesores(){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAPROFESORES + " ;", null);
         return cursorDB;
     }
+    public Cursor devolverDatosAlumnosBusqueda(String ciclo){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " WHERE " + ESTUDIANTE_CICLO + " = " + "'"+ciclo+"';",null);
+        return cursorDB;
+    }
 
+    public Cursor devolverDatosProfesDam(String cicloProfe){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        Cursor cursorDB = db.rawQuery("SELECT * FROM tabla_profesores WHERE profesor_ciclo = " + cicloProfe + ";", null);
+        return cursorDB;
+    }
 
 
 

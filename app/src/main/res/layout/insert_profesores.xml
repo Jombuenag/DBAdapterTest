@@ -108,17 +108,25 @@ Ciclo tutor despacho
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GUARDAR INFO"
+        android:text="Añadir Info"
         android:id="@+id/btnAñadirProfesor"
-        android:layout_alignTop="@+id/btnVerInfoProfesor"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="50dp"/>
+        android:layout_above="@+id/btnVerInfoProfesor"
+        android:layout_alignParentStart="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recuperar Info"
+        android:text="Ver Info"
         android:id="@+id/btnVerInfoProfesor"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="50dp"/>
+        android:layout_alignEnd="@+id/btnAñadirProfesor"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Borrar Profesor"
+        android:id="@+id/btnBorrarProfesor"
+        android:layout_alignTop="@+id/btnAñadirProfesor"
+        android:layout_alignEnd="@+id/editDespacho" />
+
+
 </RelativeLayout>

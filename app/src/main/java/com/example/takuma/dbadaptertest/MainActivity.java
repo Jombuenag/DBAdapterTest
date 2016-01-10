@@ -7,10 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-     Button btnAlumnos, btnProfesores;
+     Button btnAlumnos, btnProfesores, btnBorrarBD, btnConsultas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnAlumnos = (Button)findViewById(R.id.btnAlumnos);
         btnProfesores = (Button)findViewById(R.id.btnProfesores);
+        btnBorrarBD = (Button)findViewById(R.id.btnBorrarBD);
+        btnConsultas = (Button)findViewById(R.id.btnConsultas);
         aPantallaAlumnos();
         aPantallaProfesores();
+        aPantallaConsultas();
+        borrarDB();
 
     }
 
@@ -42,7 +47,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void borrarDB(){
+        btnBorrarBD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteDatabase("colegioDB");
+                Toast.makeText(MainActivity.this, "Se ha borrado la base de datos", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void aPantallaConsultas(){
+        btnConsultas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent aPantallaConsultas = new Intent(MainActivity.this, Consultas.class);
+                startActivity(aPantallaConsultas);
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

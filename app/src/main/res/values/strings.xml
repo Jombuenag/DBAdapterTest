@@ -6,5 +6,7 @@
     <string name="alumnos_name">Alumnos</string>
     <string name="profesores_name">Profesores</string>
     <string name="title_activity_insert_profesores">InsertProfesores</string>
+    <string name="title_activity_consultas">Consultas</string>
+
 
 </resources>

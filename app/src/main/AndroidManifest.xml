@@ -18,13 +18,16 @@
         </activity>
         <activity
             android:name=".InsertAlumnos"
-            android:label="@string/alumnos_name">
+            android:label="@string/alumnos_name" >
         </activity>
         <activity
             android:name=".InsertProfesores"
-            android:label="@string/profesores_name">
+            android:label="@string/profesores_name" >
+        </activity>
+        <activity
+            android:name=".Consultas"
+            android:label="@string/title_activity_consultas" >
         </activity>
     </application>
 
 </manifest>
-

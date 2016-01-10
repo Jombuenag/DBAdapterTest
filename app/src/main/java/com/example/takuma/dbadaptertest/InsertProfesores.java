@@ -1,6 +1,7 @@
 package com.example.takuma.dbadaptertest;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,8 @@ public class InsertProfesores extends AppCompatActivity {
     private DbHelper myDb;
 
     EditText editNombreP, editApellidosP, editEdadP, editTutor, editCicloP, editDespacho;
-    Button btnAñadir, btnVerInfo;
+    Button btnAñadir, btnVerInfo, btnBorrarProfesor;
+    public static String profesorDespedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,11 @@ public class InsertProfesores extends AppCompatActivity {
         editDespacho = (EditText)findViewById(R.id.editDespacho);
         btnAñadir = (Button)findViewById(R.id.btnAñadirProfesor);
         btnVerInfo = (Button)findViewById(R.id.btnVerInfoProfesor);
+        btnBorrarProfesor = (Button)findViewById(R.id.btnBorrarProfesor);
         myDb = new DbHelper(this);
         addDatosProfesores();
         verInfoProfesores();
+        borrarInfoProfesores();
     }
 
     public void addDatosProfesores() {
@@ -95,6 +99,39 @@ public class InsertProfesores extends AppCompatActivity {
         alertBuilder.setTitle(Title);
         alertBuilder.setMessage(Message);
         alertBuilder.show();
+    }
+
+    public void borrarInfoProfesores(){
+        btnBorrarProfesor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                despedirProfesor("Despedir Profesor", "Pon la ID del profesor que quieres despedir");
+            }
+        });
+    }
+
+    public String despedirProfesor(String Title, String Message) {
+        final EditText aQuienBorro = new EditText(this);
+        aQuienBorro.setSingleLine();
+        aQuienBorro.setPadding(50, 10, 50, 10);
+        AlertDialog.Builder jefeDeEstudios = new AlertDialog.Builder(this);
+        jefeDeEstudios.setTitle(Title);
+        jefeDeEstudios.setMessage(Message);
+        jefeDeEstudios.setView(aQuienBorro);
+        jefeDeEstudios.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                profesorDespedido = aQuienBorro.getText().toString();
+                Toast.makeText(InsertProfesores.this, "he de borrar la id : " + profesorDespedido, Toast.LENGTH_SHORT).show();
+                if (myDb.borrarProfesor(Integer.parseInt(profesorDespedido))) {
+                    Toast.makeText(InsertProfesores.this, "Se ha eliminado el alumno " + profesorDespedido + "", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InsertProfesores.this, "No se ha podido despedir al profesor " + profesorDespedido + "", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        jefeDeEstudios.show();
+        return profesorDespedido;
     }
 
     @Override
