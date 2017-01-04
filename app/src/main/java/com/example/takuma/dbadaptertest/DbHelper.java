@@ -21,7 +21,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String ESTUDIANTE_CURSO = "estudiante_curso";
     public static final String ESTUDIANTE_CICLO = "estudiante_ciclo";
     public static final String ESTUDIANTE_NOTA = "estudiante_nota";
-
     public static final String TABLAPROFESORES = "tabla_profesores";
     public static final String PROFESOR_ID = "profesor_id";
     public static final String PROFESOR_NOMBRE = "profesor_nombre";
@@ -31,14 +30,16 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String PROFESOR_CICLO = "profesor_ciclo";
     public static final String PROFESOR_DESPACHO = "profesor_despacho";
 
+    //IMPRESCINDIBLE PARA COMUNICARNOS CON LA BASE DE DATOS
     public DbHelper(Context context) {
         super(context, DATABASE_NOMBRE, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        //TABLA UNO (CON VARIABLES)
-        String  CREATE_TABLAESTUDIANTES = "CREATE TABLE IF NOT EXISTS " + TABLAESTUDIANTES + " (" +
+        //CREACIÓN TABLA ESTUDIANTES
+        String  CREATE_TABLAESTUDIANTES = "CREATE TABLE IF NOT EXISTS " +
+                TABLAESTUDIANTES + " (" +
                 ESTUDIANTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ESTUDIANTE_NOMBRE + " TEXT, " +
                 ESTUDIANTE_APELLIDOS + " TEXT, " +
@@ -47,8 +48,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 ESTUDIANTE_CICLO + " TEXT, " +
                 ESTUDIANTE_NOTA + " TEXT "  + ");";
         db.execSQL(CREATE_TABLAESTUDIANTES);
-        //TABLA PROFESORES
-        String CREATE_TABLAPROFESORES = "CREATE TABLE IF NOT EXISTS " + TABLAPROFESORES + " ( " +
+        //CREACIÓN TABLA PROFESORES
+        String CREATE_TABLAPROFESORES = "CREATE TABLE IF NOT EXISTS " +
+                TABLAPROFESORES + " ( " +
                 PROFESOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 PROFESOR_NOMBRE + " TEXT, " +
                 PROFESOR_APELLIDOS + " TEXT, "+
@@ -66,6 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //NO TIENE MÁS MISTERIO DESCRIPTIVE AS FUCK
     public boolean insertarDatosAlumnos(String nombre, String apellidos, String edad, String curso, String ciclo, String nota){
         SQLiteDatabase db = (this.getWritableDatabase());
         ContentValues contentValues = new ContentValues();
@@ -85,6 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    //NO TIENE MÁS MISTERIO DESCRIPTIVE AS FUCK
     public boolean insertarDatosProfesores(String nombre, String apellidos, String edad, String tutor, String ciclo, String despacho){
         SQLiteDatabase db = (this.getWritableDatabase());
         ContentValues contentValues = new ContentValues();
@@ -104,6 +108,7 @@ public class DbHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    //NO TIENE MÁS MISTERIO DESCRIPTIVE AS FUCK
     public boolean borrarAlumno(Integer idExpulsado){
         SQLiteDatabase db = (this.getWritableDatabase());
         try{
@@ -114,6 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return true;
     }
+    //NO TIENE MÁS MISTERIO DESCRIPTIVE AS FUCK
     public boolean borrarProfesor(Integer idDespedido){
         SQLiteDatabase db = (this.getWritableDatabase());
         try{
@@ -124,28 +130,48 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return true;
     }
+    //SELECT * FROM ALUMNOS
     public Cursor devolverDatosAlumnos(){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " ;" , null );
         return cursorDB;
     }
+    //SELECT * FROM PROFESORES
     public Cursor devolverDatosProfesores(){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAPROFESORES + " ;", null);
         return cursorDB;
     }
+    //SELECT CICLO ALUMNOS
     public Cursor devolverDatosAlumnosBusqueda(String ciclo){
         SQLiteDatabase db = (this.getWritableDatabase());
         Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " WHERE " + ESTUDIANTE_CICLO + " = " + "'"+ciclo+"';",null);
         return cursorDB;
     }
-
-    public Cursor devolverDatosProfesDam(String cicloProfe){
+    //SELECT CICLO PROFESORES
+    public Cursor devolverDatosProfesBusqueda(String ciclo){
         SQLiteDatabase db = (this.getWritableDatabase());
-        Cursor cursorDB = db.rawQuery("SELECT * FROM tabla_profesores WHERE profesor_ciclo = " + cicloProfe + ";", null);
+        Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAPROFESORES + " WHERE " + PROFESOR_CICLO + " = " + "'"+ciclo+"';", null);
         return cursorDB;
     }
-
-
+    //SELECT NOMBRE ALUMNOS
+    public Cursor devolverNomAlumnos(String nombre){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAESTUDIANTES + " WHERE " + ESTUDIANTE_NOMBRE + " = " + "'"+nombre+"';" , null );
+        return cursorDB;
+    }
+    //SELECT NOMBRE PROFESORES
+    public Cursor devolverNomProfesores(String nombre){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        Cursor cursorDB = db.rawQuery("SELECT * FROM " + TABLAPROFESORES + " WHERE " + PROFESOR_NOMBRE + " = " + "'"+nombre+"';" , null );
+        return cursorDB;
+    }
+    //SELECT POR INICIAL
+    public Cursor devolverAlumnosPorInicial(String nombre){
+        SQLiteDatabase db = (this.getWritableDatabase());
+        String query = "SELECT * FROM " + TABLAESTUDIANTES + " WHERE " + ESTUDIANTE_NOMBRE + " LIKE '%+" +nombre+ "+'";
+        Cursor cursorDB = db.rawQuery(query ,null);
+        return cursorDB;
+    }
 
 }

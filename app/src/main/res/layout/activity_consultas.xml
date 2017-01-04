@@ -35,36 +35,6 @@
 
     </LinearLayout>
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rgAlumnosProfesores"
-        android:baselineAligned="false"
-        android:measureWithLargestChild="false"
-        android:layout_below="@+id/separador_uno"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profesores"
-            android:id="@+id/rbProfesores"
-            android:layout_alignTop="@+id/rgAlumnosProfesores"
-            android:layout_alignEnd="@+id/MsgConsultas"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alumnos"
-            android:id="@+id/rbAlumnos"
-            android:layout_below="@+id/separador_uno"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1" />
-
-    </RadioGroup>
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,45 +51,8 @@
         android:text="Nombre :"
         android:id="@+id/txtNomBusqueda"
         android:textSize="24dp"
-        android:layout_marginTop="126dp"
-        android:layout_below="@+id/rgAlumnosProfesores"
+        android:layout_above="@+id/cursoBusqueda"
         android:layout_alignParentStart="true" />
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:id="@+id/rgCiclos"
-        android:layout_above="@+id/nomBusqueda"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/rgAlumnosProfesores"
-        android:layout_alignStart="@+id/btnBuscar">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAM"
-            android:id="@+id/rbBuscaDam" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAW"
-            android:id="@+id/rbBuscaDaw" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ASIR"
-            android:id="@+id/rbBuscaAsir" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3D"
-            android:id="@+id/rbBusca3D" />
-
-    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,8 +61,7 @@
         android:text="Ciclo :"
         android:id="@+id/txtCicloBusqueda"
         android:textSize="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/nomBusqueda"
+        android:layout_alignBottom="@+id/cursoBusqueda"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -138,9 +70,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/cursoBusqueda"
-        android:layout_alignTop="@+id/txtCicloBusqueda"
-        android:layout_marginTop="-10dp"
-        android:layout_alignEnd="@+id/nomBusqueda" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/txtNomBusqueda" />
 
     <Button
         android:layout_width="wrap_content"
@@ -149,6 +80,22 @@
         android:id="@+id/btnBuscar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alumnos"
+        android:id="@+id/cbAlumnos"
+        android:layout_below="@+id/separador_uno"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profesores"
+        android:id="@+id/cbProfesores"
+        android:layout_below="@+id/cbAlumnos"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

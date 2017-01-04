@@ -129,39 +129,5 @@
         android:layout_above="@+id/btnVerInfoAlumno"
         android:layout_alignEnd="@+id/editCursoA" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/editCursoA"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/btnAñadirAlumno"
-        android:layout_toStartOf="@+id/btnBorrarAlumno"
-        android:id="@+id/rgCiclos">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAM"
-            android:id="@+id/rbDam" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DAW"
-            android:id="@+id/rbDaw" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ASIR"
-            android:id="@+id/rbAsir" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3D"
-            android:id="@+id/rb3d" />
-    </RadioGroup>
-
 
 </RelativeLayout>

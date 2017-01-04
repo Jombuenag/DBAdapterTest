@@ -1,3 +1,8 @@
+/**EL AUTOR CONSIDERA QUE LOS METODOS AQUÍ IMPLEMENTADOS SON LOS SUFICIENTEMENTE DESCRIPTIVOS
+ * COMO PARA NO TENER QUE COMENTARLOS UNO POR UNO, SI TIENE ALGUNA DUDA PONGASE EN CONTACTO EN :
+ * TAKUMAKUN@GMAIL.COM
+ */
+
 package com.example.takuma.dbadaptertest;
 
 import android.app.AlertDialog;
@@ -124,7 +129,7 @@ public class InsertProfesores extends AppCompatActivity {
                 profesorDespedido = aQuienBorro.getText().toString();
                 Toast.makeText(InsertProfesores.this, "he de borrar la id : " + profesorDespedido, Toast.LENGTH_SHORT).show();
                 if (myDb.borrarProfesor(Integer.parseInt(profesorDespedido))) {
-                    Toast.makeText(InsertProfesores.this, "Se ha eliminado el alumno " + profesorDespedido + "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsertProfesores.this, "Se ha despedido al profesor " + profesorDespedido + "", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(InsertProfesores.this, "No se ha podido despedir al profesor " + profesorDespedido + "", Toast.LENGTH_SHORT).show();
                 }

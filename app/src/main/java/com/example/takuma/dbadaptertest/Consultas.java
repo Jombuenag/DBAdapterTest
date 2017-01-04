@@ -9,27 +9,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioGroup;
+import android.widget.Toast;
+
+/*IMPLEMENTAR CURSO EN LAS BUSQUEDAS Y MEJORAR LAS COMPROBACIONES DE LAS BUSQUEDAS*/
 
 public class Consultas extends AppCompatActivity {
 
     private DbHelper myDb;
 
-    RadioGroup rgAlumnosProfesores, rgCiclos;
+    CheckBox cbAlumnos, cbProfesores;
     EditText nomBusqueda, cicloBusqueda;
     Button btnBuscar;
-    String strBusqueda;
+    String strBusquedaCicloAlum, strBusquedaCicloProf;
+    String strBusquedaNomAlum, strBusquedaNomProf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultas);
-        rgAlumnosProfesores = (RadioGroup) findViewById(R.id.rgAlumnosProfesores);
-        rgCiclos = (RadioGroup) findViewById(R.id.rgCiclos);
-        btnBuscar = (Button) findViewById(R.id.btnBuscar);
-        nomBusqueda = (EditText) findViewById(R.id.nomBusqueda);
-        cicloBusqueda = (EditText) findViewById(R.id.cursoBusqueda);
+        cbAlumnos = (CheckBox)findViewById(R.id.cbAlumnos);
+        cbProfesores = (CheckBox)findViewById(R.id.cbProfesores);
+        btnBuscar = (Button)findViewById(R.id.btnBuscar);
+        nomBusqueda = (EditText)findViewById(R.id.nomBusqueda);
+        cicloBusqueda = (EditText)findViewById(R.id.cursoBusqueda);
         myDb = new DbHelper(this);
         buscador();
     }
@@ -38,32 +42,86 @@ public class Consultas extends AppCompatActivity {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                strBusqueda = String.valueOf(cicloBusqueda.getText());
-                Cursor cursorDB = myDb.devolverDatosAlumnosBusqueda(strBusqueda);
-                StringBuffer buffer = new StringBuffer();
-                try {
-                    if (datosCorrectos() && cursorDB.getCount() == -1) {
-                        verDatosBusqueda("Error", "No se ha encontrado ningún dato");
+                //SI APRETAMOS EL CHECKBOX DE ALUMNOS
+                if(cbAlumnos.isChecked()) {
+                    strBusquedaNomAlum = String.valueOf(nomBusqueda.getText());
+                    Cursor cursorDB = myDb.devolverAlumnosPorInicial(strBusquedaNomAlum);
+                    StringBuffer buffer = new StringBuffer();
+                    try {
+                        if (datosCorrectos() && cursorDB.getCount() == -1) {
+                            verDatosBusqueda("Error", "No se ha encontrado ningún dato");
+                        }
+                        while (cursorDB.moveToNext()) {
+                            buffer.append("id :" + cursorDB.getString(0) + "\n");
+                            buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
+                            buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
+                            buffer.append("Edad :" + cursorDB.getString(3) + "\n");
+                            buffer.append("Curso :" + cursorDB.getString(4) + "\n");
+                            buffer.append("Ciclo :" + cursorDB.getString(5) + "\n");
+                            buffer.append("Nota :" + cursorDB.getString(6) + "\n\n");
+                        }
+                    } catch (SQLiteException ErrorSQL) {
+                        Toast.makeText(Consultas.this, "Ha ocurrido un error en la consulta", Toast.LENGTH_SHORT).show();
+                        ErrorSQL.printStackTrace();
                     }
-                    while (cursorDB.moveToNext()) {
-                        buffer.append("id :" + cursorDB.getString(0) + "\n");
-                        buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
-                        buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
-                        buffer.append("Edad :" + cursorDB.getString(3) + "\n");
-                        buffer.append("Curso :" + cursorDB.getString(4) + "\n");
-                        buffer.append("Ciclo :" + cursorDB.getString(5) + "\n");
-                        buffer.append("Nota :" + cursorDB.getString(6) + "\n\n");
-                    }
-                }catch (SQLiteException ErrorSQL){
-
+                    //Show all data
+                    verDatosBusqueda("BUSQUEDA", buffer.toString());
                 }
-                //Show all data
-                verDatosBusqueda("BUSQUEDA", buffer.toString());
+                if(cbAlumnos.isChecked()) {
+                    strBusquedaNomAlum = String.valueOf(nomBusqueda.getText());
+                    Cursor cursorDB = myDb.devolverNomAlumnos(strBusquedaNomAlum);
+                    StringBuffer buffer = new StringBuffer();
+                    try {
+                        if (datosCorrectos() && cursorDB.getCount() == -1) {
+                            verDatosBusqueda("Error", "No se ha encontrado ningún dato");
+                        }
+                        while (cursorDB.moveToNext()) {
+                            buffer.append("id :" + cursorDB.getString(0) + "\n");
+                            buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
+                            buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
+                            buffer.append("Edad :" + cursorDB.getString(3) + "\n");
+                            buffer.append("Curso :" + cursorDB.getString(4) + "\n");
+                            buffer.append("Ciclo :" + cursorDB.getString(5) + "\n");
+                            buffer.append("Nota :" + cursorDB.getString(6) + "\n\n");
+                        }
+                    } catch (SQLiteException ErrorSQL) {
+                        Toast.makeText(Consultas.this, "Ha ocurrido un error en la consulta", Toast.LENGTH_SHORT).show();
+                        ErrorSQL.printStackTrace();
+                    }
+                    //Show all data
+                    verDatosBusqueda("BUSQUEDA", buffer.toString());
+                }
+                //SI APRETAMOS EL CHECKBOX PROFESORES
+                if(cbProfesores.isChecked()){
+                    strBusquedaNomProf = String.valueOf(nomBusqueda.getText());
+                    Cursor cursorDB = myDb.devolverNomProfesores(strBusquedaNomProf);
+                    StringBuffer buffer = new StringBuffer();
+                    try {
+                        if (datosCorrectos() && cursorDB.getCount() == -1) {
+                            verDatosBusqueda("Error", "No se ha encontrado ningún dato");
+                        }
+                        while (cursorDB.moveToNext()) {
+                            buffer.append("id :" + cursorDB.getString(0) + "\n");
+                            buffer.append("Nombre :" + cursorDB.getString(1) + "\n");
+                            buffer.append("Apellidos :" + cursorDB.getString(2) + "\n");
+                            buffer.append("Edad :" + cursorDB.getString(3) + "\n");
+                            buffer.append("Tutor :" + cursorDB.getString(4) + "\n");
+                            buffer.append("Ciclo :" + cursorDB.getString(5) + "\n");
+                            buffer.append("Despacho :" + cursorDB.getString(6) + "\n\n");
+                        }
+                    } catch (SQLiteException ErrorSQL) {
+                        Toast.makeText(Consultas.this, "Ha ocurrido un error en la consulta", Toast.LENGTH_SHORT).show();
+                        ErrorSQL.printStackTrace();
+                    }
+                    //Show all data
+                    verDatosBusqueda("BUSQUEDA", buffer.toString());
+                }
             }
         });
     }
 
-        public void verDatosBusqueda(String Title, String Message){
+    //MOSTRAMOS POR PANTALLA LOS RESULTADOS
+    public void verDatosBusqueda(String Title, String Message){
             AlertDialog.Builder verDatosAlumnos = new AlertDialog.Builder(this);
             verDatosAlumnos.setCancelable(true);
             verDatosAlumnos.setTitle(Title);
@@ -71,11 +129,13 @@ public class Consultas extends AppCompatActivity {
             verDatosAlumnos.show();
         }
 
+    //ASÍ NOS ASEGURAMOS DE TENER LOS DATOS NECESARIOS PARA REALIZAR LA BUSQUEDA
     public boolean datosCorrectos(){
-        if(cicloBusqueda.getText().length()<=0){
+        if(cicloBusqueda.getText().length()<=0 && nomBusqueda.getText().length()<=0 ){
+            Toast.makeText(Consultas.this, "Rellena los campos de busqueda porfavor", Toast.LENGTH_SHORT).show();
             return false;
         }else {
-            if(rgAlumnosProfesores.getCheckedRadioButtonId()==-1){
+            if(cbAlumnos.isChecked()==false || cbProfesores.isChecked()==false){
                 return false;
             } else {
                 return true;
@@ -83,14 +143,14 @@ public class Consultas extends AppCompatActivity {
         }
     }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.menu_consultas, menu);
             return true;
         }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 

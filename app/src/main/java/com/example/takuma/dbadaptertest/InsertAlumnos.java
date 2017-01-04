@@ -1,3 +1,8 @@
+/**EL AUTOR CONSIDERA QUE LOS METODOS AQUÍ IMPLEMENTADOS SON LOS SUFICIENTEMENTE DESCRIPTIVOS
+ * COMO PARA NO TENER QUE COMENTARLOS UNO POR UNO, SI TIENE ALGUNA DUDA PONGASE EN CONTACTO EN :
+ * TAKUMAKUN@GMAIL.COM
+ */
+
 package com.example.takuma.dbadaptertest;
 
 import android.app.AlertDialog;
@@ -10,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class InsertAlumnos extends AppCompatActivity {
@@ -19,7 +23,6 @@ public class InsertAlumnos extends AppCompatActivity {
 
     EditText editNombreA, editApellidosA, editEdadA, editCursoA, editCicloA, editNota;
     Button btnAñadir, btnVerInfo, btnBorrarAlumnos;
-    RadioGroup rgCiclos;
 
     public static String alumnoExpulsado;
 
@@ -33,7 +36,6 @@ public class InsertAlumnos extends AppCompatActivity {
         editEdadA = (EditText)findViewById(R.id.editEdadA);
         editCursoA = (EditText)findViewById(R.id.editCursoA);
         editCicloA = (EditText)findViewById(R.id.editCicloA);
-        rgCiclos = (RadioGroup)findViewById(R.id.rgCiclos);
         editNota = (EditText)findViewById(R.id.editNota);
         btnAñadir = (Button)findViewById(R.id.btnAñadirAlumno);
         btnVerInfo = (Button)findViewById(R.id.btnVerInfoAlumno);
@@ -127,14 +129,12 @@ public class InsertAlumnos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 alumnoExpulsado = aQuienBorro.getText().toString();
-
-                String nombreEstudianteAMostrar = myDb.getNombreEstudiante(Integer.parseInt(alumnoExpulsado));
-                String apellidoEstudianteAMostrar = myDb.getApellidoEstudiante(Integer.parseInt(alumnoExpulsado));
+                Toast.makeText(InsertAlumnos.this, "He de borrar la id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
 
                 if (myDb.borrarAlumno(Integer.parseInt(alumnoExpulsado))) {
-                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno " + nombreEstudianteAMostrar + " " + apellidoEstudianteAMostrar, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsertAlumnos.this, "Se ha eliminado el alumno con id : " + alumnoExpulsado, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(InsertAlumnos.this, "No se ha podido eliminar el alumno" + alumnoExpulsado + "" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsertAlumnos.this, "No se ha podido eliminar el alumno" + alumnoExpulsado + "", Toast.LENGTH_SHORT).show();
                 }
             }
         });
